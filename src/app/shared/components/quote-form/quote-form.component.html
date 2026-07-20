@@ -1,0 +1,179 @@
+<div class="quote-form-container">
+  @if (submitSuccess()) {
+    <div class="quote-success-state anim-scale-up">
+      <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+      <h2>Quote Request Submitted!</h2>
+      <p>Your request has been registered under reference <strong>{{ referenceId() }}</strong>.</p>
+      <p class="redirect-notice">We are processing price options from regional dealers. You will receive customized rates on email and WhatsApp shortly. Redirecting you to products catalog...</p>
+    </div>
+  } @else {
+    <!-- Step Indicators -->
+    <div class="step-indicator-bar">
+      <div class="step" [class.active]="currentStep() === 1" [class.completed]="currentStep() > 1">
+        <span class="step-num">1</span>
+        <span class="step-name">Site & Contact Details</span>
+      </div>
+      <div class="connector" [class.active]="currentStep() > 1"></div>
+      <div class="step" [class.active]="currentStep() === 2">
+        <span class="step-num">2</span>
+        <span class="step-name">Review Materials List</span>
+      </div>
+    </div>
+
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="quote-form-element">
+      <!-- STEP 1: Site and Contact details -->
+      @if (currentStep() === 1) {
+        <div class="step-content anim-fade-in">
+          <h3 class="step-title">1. Site Delivery & Contact Details</h3>
+          <div class="form-grid">
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="fullName">Full Name <span class="required">*</span></label>
+              <input id="fullName" type="text" formControlName="fullName" placeholder="Enter contact name" class="form-control" />
+              @if (customerForm.get('fullName')?.touched && customerForm.get('fullName')?.invalid) {
+                <span class="error-msg">Valid contact name is required</span>
+              }
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Mobile Number <span class="required">*</span></label>
+              <div class="input-phone-wrapper">
+                <span class="prefix">+91</span>
+                <input id="phone" type="tel" formControlName="phone" placeholder="10-digit number" class="form-control phone-input" />
+              </div>
+              @if (customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid) {
+                <span class="error-msg">Valid 10-digit mobile number is required</span>
+              }
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input id="email" type="email" formControlName="email" placeholder="commercial@email.com" class="form-control" />
+              @if (customerForm.get('email')?.touched && customerForm.get('email')?.invalid) {
+                <span class="error-msg">Valid email is required</span>
+              }
+            </div>
+
+            <!-- Project Type -->
+            <div class="form-group">
+              <label for="projectType">Project Type <span class="required">*</span></label>
+              <select id="projectType" formControlName="projectType" class="form-control select-control">
+                <option value="Residential">Residential Building (Home)</option>
+                <option value="Commercial">Commercial/Retail Complex</option>
+                <option value="Industrial">Industrial Warehouse/Plant</option>
+                <option value="Infrastructure">Infrastructure Road/Bridge</option>
+              </select>
+            </div>
+
+            <!-- State -->
+            <div class="form-group">
+              <label for="state">State <span class="required">*</span></label>
+              <select id="state" formControlName="state" class="form-control select-control">
+                <option value="" disabled selected>Select State</option>
+                @for (stateName of indianStates; track stateName) {
+                  <option [value]="stateName">{{ stateName }}</option>
+                }
+              </select>
+              @if (customerForm.get('state')?.touched && customerForm.get('state')?.invalid) {
+                <span class="error-msg">State selection is required</span>
+              }
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+              <label for="city">City / District <span class="required">*</span></label>
+              <input id="city" type="text" formControlName="city" placeholder="e.g. Pune / Bandra" class="form-control" />
+              @if (customerForm.get('city')?.touched && customerForm.get('city')?.invalid) {
+                <span class="error-msg">City details are required</span>
+              }
+            </div>
+
+            <!-- Site Address -->
+            <div class="form-group full-width">
+              <label for="deliveryAddress">Complete Site Delivery Address <span class="required">*</span></label>
+              <textarea id="deliveryAddress" formControlName="deliveryAddress" rows="3" placeholder="Plot No, Landmark, Sector, Pincode" class="form-control textarea-control"></textarea>
+              @if (customerForm.get('deliveryAddress')?.touched && customerForm.get('deliveryAddress')?.invalid) {
+                <span class="error-msg">Detailed delivery address is required</span>
+              }
+            </div>
+
+            <!-- Comments -->
+            <div class="form-group full-width">
+              <label for="comments">Special Instructions / Additional Brand Preferences</label>
+              <textarea id="comments" formControlName="comments" rows="2" placeholder="e.g., preference for specific cement setting speeds, custom rebar cuts..." class="form-control textarea-control"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="nextStep()">
+              <span>Review Materials List</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- STEP 2: Review and Submit -->
+      @if (currentStep() === 2) {
+        <div class="step-content anim-fade-in">
+          <h3 class="step-title">2. Review Materials & Quantity Requirements</h3>
+          
+          @if (totalItemsCount() === 0) {
+            <div class="empty-list-notice">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <p>Your quote registry list is empty. Go back and add building materials from the catalog.</p>
+              <a routerLink="/products" class="btn btn-outline">Go to Catalog</a>
+            </div>
+          } @else {
+            <div class="items-list-wrapper">
+              @for (item of quoteItems(); track item.product.id) {
+                <div class="quote-item-row">
+                  <div class="item-pic">
+                    <img [src]="item.product.image" [alt]="item.product.name" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=120&h=120&q=80'" />
+                  </div>
+                  <div class="item-description">
+                    <span class="item-brand">{{ item.product.brand }}</span>
+                    <h4>{{ item.product.name }}</h4>
+                    <span class="item-category">{{ item.product.category }}</span>
+                  </div>
+                  <div class="item-qty-selector">
+                    <button type="button" class="qty-btn" (click)="updateQty(item.product.id, item.quantity - 10)">-</button>
+                    <input 
+                      type="number" 
+                      [value]="item.quantity" 
+                      (change)="updateQty(item.product.id, +$any($event.target).value)" 
+                      class="qty-input" 
+                    />
+                    <button type="button" class="qty-btn" (click)="updateQty(item.product.id, item.quantity + 10)">+</button>
+                    <span class="item-unit">{{ item.unit }}</span>
+                  </div>
+                  <button type="button" (click)="removeItem(item.product.id)" class="delete-item-btn" title="Remove Item">
+                    <i class="fa-regular fa-trash-can"></i>
+                  </button>
+                </div>
+              }
+            </div>
+          }
+
+          <div class="form-actions-step-2">
+            <button type="button" class="btn btn-outline" (click)="prevStep()">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Back to Details</span>
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting() || totalItemsCount() === 0">
+              @if (isSubmitting()) {
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <span>Registering Quote Request...</span>
+              } @else {
+                <span>Submit Quote Request</span>
+                <i class="fa-solid fa-check"></i>
+              }
+            </button>
+          </div>
+        </div>
+      }
+    </form>
+  }
+</div>

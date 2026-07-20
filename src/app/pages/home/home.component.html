@@ -1,0 +1,143 @@
+<!-- Hero Section -->
+<app-hero></app-hero>
+
+<!-- Product Categories Grid -->
+<section class="section-categories bg-white">
+  <div class="container">
+    <div class="section-header">
+      <h2>Explore Material Categories</h2>
+      <p>Source high-grade raw materials for foundations, masonry, waterproofing, structural framing, and interior finishes.</p>
+    </div>
+    
+    <div class="categories-grid">
+      @for (cat of categories; track cat.name) {
+        <a [routerLink]="['/products']" [queryParams]="{category: cat.name}" class="category-card card-hover-lift">
+          <div class="category-img img-hover-zoom">
+            <img [src]="cat.img" [alt]="cat.name" onerror="this.src='https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=350&q=80'" />
+            <div class="category-overlay-color"></div>
+          </div>
+          <div class="category-info">
+            <div class="category-icon-badge">
+              <i [class]="cat.icon"></i>
+            </div>
+            <h3>{{ cat.name }}</h3>
+            <p>{{ cat.count }}</p>
+            <span class="category-cta">View Details <i class="fa-solid fa-arrow-right-long"></i></span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="section-why-us bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Partner With Us?</h2>
+      <p>We combine digital supply chains with heavy core logistics to offer premium construction fulfillment across India.</p>
+    </div>
+    
+    <div class="grid-4">
+      @for (feature of whyChooseUs; track feature.title) {
+        <app-feature-card 
+          [icon]="feature.icon" 
+          [title]="feature.title" 
+          [description]="feature.desc"
+        ></app-feature-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Best Sellers Catalog Highlights -->
+<section class="section-bestsellers bg-white">
+  <div class="container">
+    <div class="section-header">
+      <h2>Best Selling Products</h2>
+      <p>Top specifications trusted by India's structural engineers and premier architects for structural integrity.</p>
+    </div>
+
+    <div class="grid-4">
+      @for (prod of bestSellers(); track prod.id) {
+        <app-product-card [product]="prod"></app-product-card>
+      }
+    </div>
+
+    <div class="section-actions">
+      <a routerLink="/products" class="btn btn-secondary">
+        <span>View Full Catalog</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section-testimonials bg-white">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Indian Builders Say</h2>
+      <p>Hear from independent contractors, home developers, and commercial architects using our material streams.</p>
+    </div>
+
+    <app-testimonials></app-testimonials>
+  </div>
+</section>
+
+<!-- FAQ Accordion Section -->
+<section class="section-faq bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Need support regarding billing, freight calculations, grade mixing, or dealer networks? Read details below.</p>
+    </div>
+
+    <app-faq></app-faq>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact-home" class="section-contact bg-white">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-text-block">
+        <span class="contact-tag">DIRECT CONNECT</span>
+        <h2>Consult Our Materials Desk</h2>
+        <p>
+          Have a bulk construction layout, blueprint bill of materials (BOM), or specific questions regarding shipping channels? Send us your requirements and our commercial desk will coordinate.
+        </p>
+        
+        <div class="quick-contact-cards">
+          <div class="qc-card">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <h5>Call for Inquiry</h5>
+              <p><a href="tel:+912255550199">+91 22 5555 0199</a></p>
+            </div>
+          </div>
+
+          <div class="qc-card">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <h5>WhatsApp Chat Support</h5>
+              <p><a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">+91 98765 43210</a></p>
+            </div>
+          </div>
+
+          <div class="qc-card">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <h5>Official Correspondence</h5>
+              <p><a href="mailto:info@buildindia.co.in">info&#64;buildindia.co.in</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-block">
+        <app-contact-form></app-contact-form>
+      </div>
+    </div>
+  </div>
+</section>

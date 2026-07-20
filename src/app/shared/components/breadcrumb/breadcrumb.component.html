@@ -1,0 +1,19 @@
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a routerLink="/"><i class="fa-solid fa-house"></i> Home</a>
+    </li>
+    @for (path of paths(); track path.label; let last = $last) {
+      <li class="breadcrumb-item separator">
+        <i class="fa-solid fa-chevron-right"></i>
+      </li>
+      <li class="breadcrumb-item" [class.active]="last">
+        @if (path.url && !last) {
+          <a [routerLink]="path.url">{{ path.label }}</a>
+        } @else {
+          <span>{{ path.label }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

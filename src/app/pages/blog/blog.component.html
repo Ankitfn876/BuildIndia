@@ -1,0 +1,40 @@
+<div class="blog-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Knowledge Hub</h1>
+      <p>Practical building guides, grade specification breakdowns, and structural design advice from Indian builders.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid grid-3">
+      @for (post of posts; track post.id) {
+        <article class="blog-card card-hover-lift">
+          <div class="blog-img-box img-hover-zoom">
+            <img [src]="post.image" [alt]="post.title" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'" />
+            <span class="post-category-tag">{{ post.category }}</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="meta-row">
+              <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
+              <span class="divider">|</span>
+              <span><i class="fa-regular fa-clock"></i> {{ post.readTime }}</span>
+            </div>
+            <h2><a [routerLink]="[]">{{ post.title }}</a></h2>
+            <p>{{ post.excerpt }}</p>
+            <div class="blog-footer">
+              <span class="author">By <strong>{{ post.author }}</strong></span>
+              <a [routerLink]="[]" class="read-more-link">
+                <span>Read Full Guide</span>
+                <i class="fa-solid fa-arrow-right-long"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</div>

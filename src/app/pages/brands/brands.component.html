@@ -1,0 +1,34 @@
+<div class="brands-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Our Partner Brands</h1>
+      <p>Direct supply partnerships with India's leading manufacturers for certified construction.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <!-- Category Filters -->
+    <div class="brands-filters">
+      @for (cat of categories; track cat) {
+        <button 
+          type="button" 
+          [class]="selectedCategory() === cat ? 'filter-btn active' : 'filter-btn'" 
+          (click)="setFilter(cat)"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+
+    <!-- Grid Directory -->
+    <div class="brands-grid">
+      @for (br of filteredBrands(); track br.id) {
+        <div class="brand-item">
+          <app-brand-card [brand]="br"></app-brand-card>
+        </div>
+      }
+    </div>
+  </div>
+</div>

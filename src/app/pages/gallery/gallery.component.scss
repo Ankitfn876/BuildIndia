@@ -1,0 +1,32 @@
+/* Banner Header */
+.page-header-banner {
+  background: var(--gradient-premium);
+  color: var(--color-white);
+  padding: 4rem 0;
+  text-align: center;
+  border-bottom: 4px solid var(--color-primary-saffron);
+
+  h1 {
+    font-size: 2.25rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    
+    @media (min-width: 768px) {
+      font-size: 3.25rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    color: #CDD8E5;
+    margin-bottom: 0;
+    
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.page-content {
+  padding-bottom: 6rem;
+}

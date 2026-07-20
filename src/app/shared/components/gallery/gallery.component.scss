@@ -1,0 +1,227 @@
+.gallery-container {
+  width: 100%;
+}
+
+.gallery-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+
+  .filter-btn {
+    padding: 0.65rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(11, 60, 111, 0.15);
+    background: var(--color-white);
+    color: var(--color-primary-blue);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-primary-saffron);
+      color: var(--color-primary-saffron);
+      background: rgba(255, 107, 0, 0.04);
+    }
+
+    &.active {
+      background: var(--gradient-saffron);
+      color: var(--color-white);
+      border-color: var(--color-primary-saffron);
+      box-shadow: var(--shadow-saffron);
+    }
+  }
+}
+
+/* Masonry Simulation Layout using CSS Columns */
+.gallery-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+  width: 100%;
+
+  @media (min-width: 576px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 992px) {
+    column-count: 3;
+  }
+}
+
+.gallery-card {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  border: 1px solid rgba(11, 60, 111, 0.06);
+}
+
+.gallery-img-box {
+  position: relative;
+  width: 100%;
+  display: block;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(11, 60, 111, 0.95) 0%,
+    rgba(11, 60, 111, 0.6) 60%,
+    rgba(11, 60, 111, 0.3) 100%
+  );
+  color: var(--color-white);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 2;
+
+  .gallery-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary-saffron);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    align-self: flex-start;
+  }
+
+  h3 {
+    color: var(--color-white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: #D3E0EE;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+
+  .zoom-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+.gallery-card:hover {
+  .gallery-overlay {
+    opacity: 1;
+  }
+}
+
+/* Lightbox styles */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(3, 15, 30, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scaleUp var(--transition-normal) forwards;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -3.5rem;
+  right: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: var(--color-primary-saffron);
+    border-color: var(--color-primary-saffron);
+    transform: scale(1.05);
+  }
+}
+
+.lightbox-img-wrapper {
+  width: 100%;
+  max-height: 75vh;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-premium);
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.lightbox-caption {
+  width: 100%;
+  padding-top: 1.25rem;
+  text-align: center;
+
+  h3 {
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-family: var(--font-display);
+  }
+}

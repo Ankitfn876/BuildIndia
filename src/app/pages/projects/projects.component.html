@@ -1,0 +1,55 @@
+<div class="projects-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Featured Landmarks</h1>
+      <p>Showcasing major residential, commercial, and infrastructure builds across India supplied by BuildIndia.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <!-- Filters Bar -->
+    <div class="projects-filters">
+      @for (cat of categories; track cat) {
+        <button 
+          type="button" 
+          [class]="selectedCategory() === cat ? 'filter-btn active' : 'filter-btn'" 
+          (click)="setFilter(cat)"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      @for (proj of filteredProjects(); track proj.id) {
+        <div class="project-card card-hover-lift">
+          <div class="project-img-box img-hover-zoom">
+            <img [src]="proj.image" [alt]="proj.title" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'" />
+            <span class="project-category-badge">{{ proj.category }}</span>
+          </div>
+          <div class="project-content">
+            <span class="project-location"><i class="fa-solid fa-location-dot"></i> {{ proj.location }}</span>
+            <h3>{{ proj.title }}</h3>
+            
+            <div class="project-details-list">
+              <p>Client: <strong>{{ proj.client }}</strong></p>
+              <p>Completion: <strong>{{ proj.completionYear }}</strong></p>
+            </div>
+
+            <div class="materials-tags-box">
+              <h5>Supplied Components:</h5>
+              <div class="tags-list">
+                @for (mat of proj.materialsUsed; track mat) {
+                  <span class="mat-tag">{{ mat }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

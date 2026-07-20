@@ -1,0 +1,97 @@
+<footer class="footer-main">
+  <div class="container footer-grid-container">
+    <!-- Brand Info & Pitch -->
+    <div class="footer-col brand-col">
+      <a routerLink="/" class="footer-logo">
+        <span class="logo-accent">Build</span><span class="logo-highlight">India</span>
+      </a>
+      <p class="brand-desc">
+        Empowering India's construction sector with top-tier materials. From foundation to finish, we supply strength, durability, and reliability for residential, commercial, and infrastructure developments.
+      </p>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/projects">Featured Projects</a></li>
+      </ul>
+    </div>
+
+    <!-- Materials Categories -->
+    <div class="footer-col">
+      <h3>Product Ranges</h3>
+      <ul class="footer-links">
+        <li><a routerLink="/products" [queryParams]="{category: 'Sariya'}">Sariya (TMT Steel)</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Sand'}">Sand (Balu)</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Cement'}">OPC/PPC Cement</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Stone'}">Gitti Stone</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact & Newsletter -->
+    <div class="footer-col contact-col">
+      <h3>Get in Touch</h3>
+      <ul class="contact-details">
+        <li>
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Unit 402, Premium Trade Tower, Bandra Kurla Complex (BKC), Mumbai, Maharashtra - 400051</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-phone"></i>
+          <a href="tel:+912255550199">+91 22 5555 0199</a>
+        </li>
+        <li>
+          <i class="fa-brands fa-whatsapp"></i>
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">+91 98765 43210</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:info@buildindia.co.in">info&#64;buildindia.co.in</a>
+        </li>
+      </ul>
+
+      <div class="newsletter-box">
+        <h4>Subscribe to Newsletter</h4>
+        <form (ngSubmit)="subscribeNewsletter()" class="newsletter-form">
+          <input 
+            type="email" 
+            [(ngModel)]="newsletterEmail" 
+            name="email" 
+            placeholder="Enter business email" 
+            required 
+            class="newsletter-input"
+          />
+          <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+        @if (subscriptionSuccess()) {
+          <p class="success-message anim-fade-in">Thank you for subscribing!</p>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright and Fine Print -->
+  <div class="footer-bottom">
+    <div class="container bottom-content">
+      <p>&copy; {{ currentYear }} BuildIndia Materials Pvt. Ltd. All rights reserved.</p>
+      <div class="bottom-links">
+        <a routerLink="/privacy">Privacy Policy</a>
+        <span class="divider">|</span>
+        <a routerLink="/terms">Terms & Conditions</a>
+        <span class="divider">|</span>
+        <a routerLink="/sitemap">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>

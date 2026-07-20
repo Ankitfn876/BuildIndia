@@ -1,0 +1,15 @@
+<a [routerLink]="['/products']" [queryParams]="{brand: brand().name}" class="brand-card card-hover-lift" [title]="brand().name">
+  <div class="logo-wrapper">
+    <div class="logo-image-box">
+      <img [src]="brand().logo" [alt]="brand().name + ' Logo'" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      
+      <div class="brand-fallback-logo" style="display: none;">
+        <span class="fb-text">{{ brand().name }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-info">
+    <h4>{{ brand().name }}</h4>
+    <p>{{ brand().category }}</p>
+  </div>
+</a>

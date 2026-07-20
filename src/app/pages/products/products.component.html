@@ -1,0 +1,65 @@
+<div class="products-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Materials Catalog</h1>
+      <p>Source high-performance components backed by absolute brand warranty.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <div class="catalog-layout">
+      <!-- Sidebar Filters (Desktop) -->
+      <aside class="sidebar-wrapper">
+        <app-product-filter 
+          [categories]="categories" 
+          [selectedCategory]="selectedCategory()" 
+          (categoryChange)="onCategoryChange($event)"
+          (clearFilters)="onClearAll()"
+        ></app-product-filter>
+      </aside>
+
+      <!-- Main Catalog Display -->
+      <main class="catalog-main">
+        <!-- Top Toolbar -->
+        <div class="catalog-toolbar">
+          <div class="search-bar-wrapper">
+            <app-search-bar (searchChange)="onSearch($event)"></app-search-bar>
+          </div>
+          <div class="toolbar-info">
+            <p>Showing <strong>{{ filteredProducts().length }}</strong> products</p>
+          </div>
+        </div>
+
+        <!-- Grid Listings -->
+        @if (isLoading()) {
+          <app-loading-skeleton [count]="6"></app-loading-skeleton>
+        } @else {
+          @if (paginatedProducts().length === 0) {
+            <div class="no-results-state anim-fade-in">
+              <i class="fa-solid fa-box-open"></i>
+              <h3>No matching materials found</h3>
+              <p>Try refining your search queries or clearing active filters.</p>
+              <button type="button" class="btn btn-primary" (click)="onClearAll()">Reset All Filters</button>
+            </div>
+          } @else {
+            <div class="products-grid anim-fade-in">
+              @for (prod of paginatedProducts(); track prod.id) {
+                <app-product-card [product]="prod"></app-product-card>
+              }
+            </div>
+
+            <!-- Pagination Wrapper -->
+            <app-pagination
+              [totalItems]="filteredProducts().length"
+              [pageSize]="pageSize"
+              [currentPage]="currentPage()"
+              (pageChange)="onPageChange($event)"
+            ></app-pagination>
+          }
+        }
+      </main>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="services-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Value-Added Services</h1>
+      <p>Supporting your builds with technical calculations, lab tests, and scheduled transit networks.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <!-- Services List -->
+    <div class="services-list-grid">
+      @for (serv of services; track serv.title; let isEven = $even) {
+        <div class="service-row-card glass-card card-hover-lift" [class.row-rev]="isEven">
+          <div class="service-icon-box">
+            <i [class]="serv.icon"></i>
+          </div>
+          <div class="service-content">
+            <h2>{{ serv.title }}</h2>
+            <p>{{ serv.desc }}</p>
+            <ul class="service-bullets">
+              @for (feat of serv.features; track feat) {
+                <li>
+                  <i class="fa-solid fa-circle-check text-saffron"></i>
+                  <span>{{ feat }}</span>
+                </li>
+              }
+            </ul>
+            <div class="service-actions-row">
+              <a routerLink="/contact" class="btn btn-outline">
+                <span>Inquire Service</span>
+                <i class="fa-solid fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

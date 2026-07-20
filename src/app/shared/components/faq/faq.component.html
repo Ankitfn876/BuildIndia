@@ -1,0 +1,26 @@
+<div class="faq-accordion">
+  @for (faq of faqs; track faq.question; let idx = $index) {
+    <div class="faq-item" [class.active]="activeIndex() === idx">
+      <button 
+        type="button" 
+        class="faq-trigger" 
+        (click)="toggleFaq(idx)" 
+        [attr.aria-expanded]="activeIndex() === idx"
+      >
+        <span class="faq-question">{{ faq.question }}</span>
+        <span class="faq-icon">
+          @if (activeIndex() === idx) {
+            <i class="fa-solid fa-minus"></i>
+          } @else {
+            <i class="fa-solid fa-plus"></i>
+          }
+        </span>
+      </button>
+      <div class="faq-content-wrapper" [class.show]="activeIndex() === idx">
+        <div class="faq-content">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

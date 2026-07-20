@@ -1,0 +1,60 @@
+<div class="product-detail-page">
+  <div class="container">
+    @if (product()) {
+      <app-breadcrumb [paths]="breadcrumbPaths()"></app-breadcrumb>
+
+      <div class="detail-grid">
+        <!-- Visuals Column -->
+        <div class="visuals-col">
+          <div class="main-image-box">
+            <img [src]="product()?.image" [alt]="product()?.name" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80'" />
+          </div>
+        </div>
+
+        <!-- Specs Column -->
+        <div class="specs-col">
+          <span class="category-badge">{{ product()?.category }}</span>
+          <h1 class="product-title">{{ product()?.name }}</h1>
+
+          <div class="price-box">
+            <span class="price-lbl">Wholesale Estimate Range</span>
+            <span class="price-val">{{ product()?.priceRange }}</span>
+          </div>
+
+          <p class="description">{{ product()?.description }}</p>
+        </div>
+      </div>
+
+      <!-- Specs & Features Detail Block -->
+      <div class="product-features-specs-block">
+        <!-- Specs Table -->
+        <div class="specs-table-box">
+          <h2>Technical Specifications</h2>
+          <table class="specs-table">
+            <tbody>
+              @for (key of specsKeys(); track key) {
+                <tr>
+                  <td class="spec-key">{{ key }}</td>
+                  <td class="spec-val">{{ product()?.specs?.[key] }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Features List -->
+        <div class="features-list-box">
+          <h2>Key Benefits</h2>
+          <ul class="features-list">
+            @for (feat of product()?.features; track feat) {
+              <li>
+                <i class="fa-solid fa-circle-check text-saffron"></i>
+                <span>{{ feat }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
+</div>

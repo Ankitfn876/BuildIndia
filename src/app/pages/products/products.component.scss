@@ -1,0 +1,132 @@
+/* Banner styling matches about, can be shared globally */
+.page-header-banner {
+  background: var(--gradient-premium);
+  color: var(--color-white);
+  padding: 4rem 0;
+  text-align: center;
+  border-bottom: 4px solid var(--color-primary-saffron);
+
+  h1 {
+    font-size: 2.25rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    
+    @media (min-width: 768px) {
+      font-size: 3.25rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    color: #CDD8E5;
+    margin-bottom: 0;
+    
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.catalog-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0 5rem 0;
+
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.sidebar-wrapper {
+  width: 100%;
+}
+
+.catalog-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* Toolbar configuration */
+.catalog-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--color-white);
+  border: 1px solid rgba(11, 60, 111, 0.06);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.search-bar-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.toolbar-info {
+  p {
+    font-size: 0.95rem;
+    color: #555555;
+    margin-bottom: 0;
+
+    strong {
+      color: var(--color-primary-blue);
+    }
+  }
+}
+
+/* Products grid settings */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* No results state */
+.no-results-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(11, 60, 111, 0.08);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  i {
+    font-size: 3.5rem;
+    color: var(--color-cement-grey);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    color: var(--color-primary-blue);
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #666666;
+    margin-bottom: 1rem;
+    max-width: 400px;
+  }
+}

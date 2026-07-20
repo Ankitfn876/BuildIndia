@@ -1,0 +1,35 @@
+<a [routerLink]="['/products', product().id]" class="product-card card-hover-lift">
+  <!-- Image Wrapper with Zoom -->
+  <div class="product-img-wrapper img-hover-zoom">
+    <img [src]="product().image" [alt]="product().name" loading="lazy" />
+    @if (product().bestSeller) {
+      <span class="bestseller-badge">Best Seller</span>
+    }
+  </div>
+
+  <!-- Content Section -->
+  <div class="product-content">
+    <div class="product-meta">
+      <span class="category-tag">{{ product().category }}</span>
+    </div>
+    
+    <h3 class="product-title">{{ product().name }}</h3>
+    
+    <!-- Rating Star Bar -->
+    <div class="rating-bar">
+      <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <span>{{ product().rating }}</span>
+      </div>
+      <span class="rating-count">({{ product().ratingCount }} reviews)</span>
+    </div>
+
+    <!-- Price Footer -->
+    <div class="product-footer">
+      <div class="price-box">
+        <span class="price-label">Est. Price</span>
+        <span class="price-value">{{ product().priceRange }}</span>
+      </div>
+    </div>
+  </div>
+</a>

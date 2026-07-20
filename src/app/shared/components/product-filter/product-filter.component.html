@@ -1,0 +1,33 @@
+<div class="filter-sidebar glass-card">
+  <div class="filter-header">
+    <h3>Filters</h3>
+    <button type="button" class="btn-clear-all" (click)="onClear()">Clear All</button>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="filter-section">
+    <h4>Material Categories</h4>
+    <div class="filter-options-list">
+      <button 
+        type="button" 
+        [class]="selectedCategory() === 'All' ? 'opt-btn active' : 'opt-btn'"
+        (click)="onSelectCategory('All')"
+      >
+        <span>All Categories</span>
+        <i class="fa-solid fa-chevron-right icon-nav"></i>
+      </button>
+      @for (cat of categories(); track cat) {
+        <button 
+          type="button" 
+          [class]="selectedCategory() === cat ? 'opt-btn active' : 'opt-btn'"
+          (click)="onSelectCategory(cat)"
+        >
+          <span>{{ cat }}</span>
+          <i class="fa-solid fa-chevron-right icon-nav"></i>
+        </button>
+      }
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,43 @@
+<section class="hero-section">
+  <!-- Background Image with Scrim Overlay -->
+  <div class="hero-bg-overlay">
+    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80" alt="Modern Indian Construction Site Hero Background" class="hero-bg-img" />
+    <div class="scrim"></div>
+  </div>
+
+  <div class="container hero-content-container">
+    <div class="hero-text-block">
+      <span class="hero-tagline anim-fade-in">
+        <i class="fa-solid fa-building-circle-check"></i> TRUSTED PAN-INDIA MATERIALS PARTNER
+      </span>
+      <h1 class="hero-title anim-slide-up">Building India's Future with Quality Materials</h1>
+      <p class="hero-subtitle anim-slide-up">
+        Trusted supplier of premium construction materials for homes, commercial projects, and infrastructure. Powering durability from foundations to finishes with India's leading brands.
+      </p>
+      
+      <div class="hero-actions anim-slide-up">
+        <a routerLink="/products" class="btn btn-primary">
+          <span>View Products</span>
+          <i class="fa-solid fa-tags"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="hero-stats-panel glass-card-dark anim-slide-up">
+      <div class="stats-grid">
+        @for (stat of stats; track stat.label) {
+          <div class="stat-item">
+            <div class="stat-icon-wrapper">
+              <i [class]="stat.icon"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-val">{{ stat.value }}</span>
+              <span class="stat-lbl">{{ stat.label }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+.filter-sidebar {
+  padding: 1.75rem;
+  background: var(--color-white);
+  border: 1px solid rgba(11, 60, 111, 0.08);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(11, 60, 111, 0.06);
+
+  h3 {
+    font-size: 1.2rem;
+    color: var(--color-primary-blue);
+  }
+
+  .btn-clear-all {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary-blue);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-saffron);
+    }
+  }
+}
+
+.filter-section {
+  margin-bottom: 2rem;
+
+  h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #666666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+}
+
+.filter-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  .opt-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-dark-grey);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+
+    .icon-nav {
+      font-size: 0.7rem;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all var(--transition-fast);
+      color: var(--color-primary-saffron);
+    }
+
+    &:hover {
+      background: rgba(11, 60, 111, 0.04);
+      color: var(--color-primary-blue);
+      padding-left: 1.25rem;
+
+      .icon-nav {
+        opacity: 0.7;
+        transform: translateX(0);
+      }
+    }
+
+    &.active {
+      background: rgba(11, 60, 111, 0.06);
+      color: var(--color-primary-blue);
+      font-weight: 700;
+      padding-left: 1.25rem;
+      border-left: 3px solid var(--color-primary-blue);
+
+      .icon-nav {
+        opacity: 1;
+        transform: translateX(0);
+        color: var(--color-primary-blue);
+      }
+    }
+  }
+}

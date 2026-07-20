@@ -1,0 +1,35 @@
+@if (totalPages() > 1) {
+  <nav class="pagination-nav" aria-label="Catalog Navigation">
+    <button 
+      type="button" 
+      class="nav-btn prev-btn" 
+      [disabled]="currentPage() === 1" 
+      (click)="selectPage(currentPage() - 1)"
+      aria-label="Previous Page"
+    >
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="page-numbers-list">
+      @for (pg of pagesArray(); track pg) {
+        <button 
+          type="button" 
+          [class]="currentPage() === pg ? 'num-btn active' : 'num-btn'" 
+          (click)="selectPage(pg)"
+        >
+          {{ pg }}
+        </button>
+      }
+    </div>
+
+    <button 
+      type="button" 
+      class="nav-btn next-btn" 
+      [disabled]="currentPage() === totalPages()" 
+      (click)="selectPage(currentPage() + 1)"
+      aria-label="Next Page"
+    >
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </nav>
+}

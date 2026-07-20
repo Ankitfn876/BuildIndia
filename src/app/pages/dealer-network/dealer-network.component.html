@@ -1,0 +1,78 @@
+<div class="dealer-page-container">
+  <div class="page-header-banner">
+    <div class="container banner-content">
+      <h1>Dealer Network</h1>
+      <p>Locate regional distribution hubs and authorized partner depots across India.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-breadcrumb [paths]="breadcrumbPaths"></app-breadcrumb>
+
+    <!-- Toolbar Filters -->
+    <div class="dealer-toolbar glass-card">
+      <div class="filter-group">
+        <label for="stateSelect">Select Region</label>
+        <select 
+          id="stateSelect" 
+          [ngModel]="selectedState()" 
+          (ngModelChange)="selectedState.set($event)" 
+          class="form-control select-control"
+        >
+          @for (stateName of states; track stateName) {
+            <option [value]="stateName">{{ stateName === 'All' ? 'All States' : stateName }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="search-group">
+        <label for="dealerSearch">Search Supplier Yard</label>
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input 
+            id="dealerSearch" 
+            type="text" 
+            [ngModel]="searchQuery()" 
+            (ngModelChange)="searchQuery.set($event)" 
+            placeholder="Type city or dealer name..." 
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Dealers Grid -->
+    <div class="dealers-grid">
+      @if (filteredDealers().length === 0) {
+        <div class="no-dealers-notice anim-fade-in">
+          <i class="fa-solid fa-store-slash"></i>
+          <h3>No authorized suppliers found</h3>
+          <p>We are expanding our logistics yards. You can still submit a custom estimate request and our estimators will organize direct factory dispatch to your site.</p>
+          <a routerLink="/request-quote" class="btn btn-primary">Request Custom Quote</a>
+        </div>
+      } @else {
+        @for (dl of filteredDealers(); track dl.id) {
+          <div class="dealer-card glass-card card-hover-lift">
+            <div class="dealer-badge-header">
+              <span class="location-badge"><i class="fa-solid fa-map-pin"></i> {{ dl.city }}, {{ dl.state }}</span>
+            </div>
+            <div class="dealer-card-body">
+              <h3>{{ dl.name }}</h3>
+              <p class="address-text"><i class="fa-solid fa-location-dot"></i> {{ dl.address }}</p>
+              <p class="phone-text"><i class="fa-solid fa-phone"></i> <a [href]="'tel:' + dl.phone">{{ dl.phone }}</a></p>
+
+              <div class="authorized-sectors">
+                <h4>Authorized Inventory</h4>
+                <div class="sectors-list">
+                  @for (sec of dl.categories; track sec) {
+                    <span class="sector-tag">{{ sec }}</span>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>
