@@ -21,6 +21,7 @@ jobs:
           npm ci
           npx ng build --base-href /BuildIndia/
           cp dist/building-materials-india/browser/index.html dist/building-materials-india/browser/404.html
+          touch dist/building-materials-india/browser/.nojekyll
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
